@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Foodie Hub</title>
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
+
+  <!-- Bootstrap Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet" />
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet"/>
+
+  <style>
+    /* General */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: url('https://www.transparenttextures.com/patterns/cream-dust.png'),
+                  linear-gradient(to bottom, #fff7ed, #ffe4c4);
+      background-repeat: repeat;
+      background-attachment: fixed;
+      color: #333;
+    }
+
+    /* Hero */
+    .hero-section {
+      height: 100vh;
+      background: url('images/restaurant.jpg') center/cover no-repeat;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: white;
+    }
+
+    .hero-section .overlay {
+      background-color: rgba(0,0,0,0.5);
+      padding: 40px;
+      border-radius: 10px;
+      max-width: 600px;
+    }
+
+    /* Navbar */
+    .nav-link:hover {
+      color: orange !important;
+      transform: scale(1.1);
+      transition: transform 0.3s ease;
+    }
+
+    /* Section Padding */
+    .section {
+      padding: 60px 0;
+    }
+
+    /* Cards */
+    .card-effect {
+      border-radius: 15px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      background-color: white;
+      color: inherit;
+    }
+
+    .card-effect:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.2);
+    }
+
+    .restaurant-img,
+    .menu-img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      border-radius: 15px 15px 0 0;
+    }
+
+    /* Review images */
+    .review-img {
+      width: 100px;
+      height: 100px;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 3px solid white;
+      margin: 1rem auto 0;
+      display: block;
+    }
+
+    /* About and Signup images */
+    .about-img,
+    .signup-img {
+      width: 100%;
+      max-width: 400px;
+      height: auto;
+      border-radius: 15px;
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+      box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+      margin: 1rem auto;
+      display: block;
+    }
+
+    .about-img:hover,
+    .signup-img:hover {
+      transform: scale(1.05);
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+    }
+
+    /* Buttons */
+    .btn-dark {
+      transition: background-color 0.3s ease, transform 0.3s ease;
+    }
+    .btn-dark:hover {
+      background-color: #ff6600;
+      transform: scale(1.05);
+      color: white;
+    }
+
+    /* Carousel Caption */
+    .carousel-caption {
+      bottom: 1.5rem;
+      text-shadow: 0 1px 5px rgba(0,0,0,0.7);
+      font-weight: 600;
+    }
+
+    /* Modal Styling */
+    .modal-content {
+      background-color: #fff7ed;
+      border-radius: 15px;
+    }
+
+    /* Footer */
+    footer {
+      background-color: #222;
+      color: white;
+      padding: 1rem 0;
+      text-align: center;
+    }
+
+    .social-icons a {
+      color: orange;
+      font-size: 1.5rem;
+      margin: 0 10px;
+      transition: color 0.3s, transform 0.3s;
+    }
+
+    .social-icons a:hover {
+      color: white;
+      transform: scale(1.2);
+    }
+
+    /* Animate text */
+    .animate-text {
+      animation: moveText 2s ease-in-out infinite alternate;
+    }
+
+    @keyframes moveText {
+      0% {transform: translateY(0);}
+      100% {transform: translateY(-10px);}
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .hero-section .overlay h1 {
+        font-size: 2rem;
+      }
+
+      .hero-section .overlay p {
+        font-size: 1rem;
+      }
+
+      .about-img,
+      .signup-img {
+        max-width: 90%;
+      }
+    }
+
+    @media (max-width: 576px) {
+      .carousel-caption {
+        font-size: 0.9rem;
+        padding: 0.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+  <div class="container">
+    <a class="navbar-brand fw-bold" href="#"><i class="bi bi-egg-fried me-2"></i>Foodie Hub</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu"
+      aria-controls="navMenu" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navMenu">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item"><a class="nav-link active" href="#home">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="#restaurants">Restaurants</a></li>
+        <li class="nav-item"><a class="nav-link" href="#menu">Menu</a></li>
+        <li class="nav-item"><a class="nav-link" href="#reviews">Reviews</a></li>
+        <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+        <li class="nav-item"><a class="nav-link" href="#create-account-modal" data-bs-toggle="modal" data-bs-target="#createAccountModal">Create Account</a></li>
+        <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- Hero -->
+<header id="home" class="hero-section">
+  <div class="overlay text-center">
+    <h1 class="display-4 fw-bold animate-text">Welcome to Foodie Hub</h1>
+    <p class="lead">Order your favorite meals instantly!</p>
+  </div>
+</header>
+
+<!-- Restaurants Carousel -->
+<section id="restaurants" class="section text-center">
+  <div class="container">
+    <h2 class="mb-4">Our Restaurants</h2>
+
+    <div id="restaurantCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="4000">
+      <div class="carousel-inner rounded-4 shadow">
+        <div class="carousel-item active">
+          <img src="images/restaurant1.jpg" class="d-block w-100 rounded" alt="Tasty Bites" style="height:300px; object-fit:cover;">
+          <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-50 rounded p-3">
+            <h5>Tasty Bites</h5>
+            <p>Delicious meals for every taste!</p>
+          </div>
+        </div>
+        <div class="carousel-item">
+          <img src="images/restaurant2.jpg" class="d-block w-100 rounded" alt="Flavor House" style="height:300px; object-fit:cover;">
+          <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-50 rounded p-3">
+            <h5>Flavor House</h5>
+            <p>Authentic international flavors.</p>
+          </div>
+        </div>
+        <div class="carousel-item">
+          <img src="images/restaurant3.jpg" class="d-block w-100 rounded" alt="Green Garden" style="height:300px; object-fit:cover;">
+          <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-50 rounded p-3">
+            <h5>Green Garden</h5>
+            <p>Fresh and healthy vegetarian dishes.</p>
+          </div>
+        </div>
+        <div class="carousel-item">
+          <img src="images/restaurant4.jpg" class="d-block w-100 rounded" alt="Spice Route" style="height:300px; object-fit:cover;">
+          <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-50 rounded p-3">
+            <h5>Spice Route</h5>
+            <p>Exotic spices and bold flavors.</p>
+          </div>
+        </div>
+      </div>
+      <button class="carousel-control-prev" type="button" data-bs-target="#restaurantCarousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#restaurantCarousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- Menu -->
+<section id="menu" class="section text-center">
+  <div class="container">
+    <h2 class="mb-4">Menu</h2>
+    <div class="row g-4">
+      <div class="col-md-4">
+        <div class="card h-100 card-effect">
+          <img src="images/grilled-chicken.jpg" alt="Grilled Chicken" class="menu-img" />
+          <div class="card-body">
+            <h5>Grilled Chicken</h5>
+            <p>Juicy grilled chicken served with salad.</p>
+            <span class="badge bg-success">$12.99</span>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card h-100 card-effect">
+          <img src="images/pasta-primavera.jpg" alt="Pasta Primavera" class="menu-img" />
+          <div class="card-body">
+            <h5>Pasta Primavera</h5>
+            <p>Fresh veggies tossed in pasta.</p>
+            <span class="badge bg-danger">Unavailable</span>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card h-100 card-effect">
+          <img src="images/beef-burger.jpg" alt="Beef Burger" class="menu-img" />
+          <div class="card-body">
+            <h5>Beef Burger</h5>
+            <p>Classic beef burger with cheese and fries.</p>
+            <span class="badge bg-success">$8.75</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Reviews -->
+<section id="reviews" class="section text-center">
+  <div class="container">
+    <h2 class="mb-4">Customer Reviews</h2>
+    <div class="row g-4">
+      <div class="col-md-4">
+        <div class="card h-100 card-effect">
+          <img src="images/review1.jpg" alt="Review from Aisha" class="review-img" />
+          <p>"Food was delicious and delivered on time!"</p>
+          <h6>- Aisha, Istanbul</h6>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card h-100 card-effect">
+          <img src="images/review2.jpg" alt="Review from Omar" class="review-img" />
+          <p>"Great experience and tasty dishes!"</p>
+          <h6>- Omar, Ankara</h6>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card h-100 card-effect">
+          <img src="images/review3.jpg" alt="Review from Sara" class="review-img" />
+          <p>"Highly recommended food delivery site!"</p>
+          <h6>- Sara, Bursa</h6>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- About -->
+<section id="about" class="section text-center">
+  <div class="container">
+    <h2 class="mb-4">About Foodie Hub</h2>
+    <img src="images/about-photo.jpg" alt="About Foodie Hub" class="about-img" />
+    <p>Foodie Hub connects you with top restaurants offering a fast, reliable, and seamless food ordering experience.</p>
+  </div>
+</section>
+
+<!-- Button to trigger Create Account Modal -->
+<div class="text-center my-4">
+  <button type="button" class="btn btn-dark btn-lg" data-bs-toggle="modal" data-bs-target="#createAccountModal">
+    Create an Account
+  </button>
+</div>
+
+<!-- Create Account Modal -->
+<div class="modal fade" id="createAccountModal" tabindex="-1" aria-labelledby="createAccountLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content rounded-4 shadow">
+      <div class="modal-header">
+        <h5 class="modal-title" id="createAccountLabel">Create an Account</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form class="row g-3" novalidate>
+          <div class="col-12">
+            <input type="text" class="form-control" placeholder="Username" required />
+            <div class="invalid-feedback">Please enter a username.</div>
+          </div>
+          <div class="col-12">
+            <input type="email" class="form-control" placeholder="Email" required />
+            <div class="invalid-feedback">Please enter a valid email.</div>
+          </div>
+          <div class="col-12">
+            <input type="password" class="form-control" placeholder="Password" required />
+            <div class="invalid-feedback">Please enter a password.</div>
+          </div>
+          <div class="col-12 text-center">
+            <button type="submit" class="btn btn-dark w-100">Sign Up</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Contact -->
+<section id="contact" class="section">
+  <div class="container">
+    <h2 class="text-center mb-4">Get in Touch</h2>
+    <form class="row g-3">
+      <div class="col-md-4">
+        <input type="text" class="form-control" placeholder="Your Name" required />
+      </div>
+      <div class="col-md-4">
+        <input type="email" class="form-control" placeholder="Your Email" required />
+      </div>
+      <div class="col-md-4">
+        <textarea class="form-control" placeholder="Your Message" rows="1" required></textarea>
+      </div>
+      <div class="col-12 text-center">
+        <button type="submit" class="btn btn-dark">Send</button>
+      </div>
+    </form>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <p>© 2025 Afifa Ghaznawi</p>
+  <div class="social-icons">
+    <a href="https://github.com/AfifaGhaznawi" target="_blank" aria-label="GitHub"><i class="bi bi-github"></i></a>
+    <a href="https://x.com/afifa_ghaznawi?s=21" target="_blank" aria-label="Twitter"><i class="bi bi-twitter-x"></i></a>
+    <a href="https://linkedin.com/in/afifa-ghaznawi-2729622a4" target="_blank" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
+  </div>
+</footer>
+
+<!-- Bootstrap Bundle JS (includes Popper for modal, navbar toggling) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>
